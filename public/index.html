@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Healthcare Project Manager</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div><div class="brand-mark">+</div><div><strong>CarePlan</strong><span>Healthcare project manager</span></div></div>
+    <div class="connection"><i id="db-light"></i><span id="db-status">Checking database…</span></div>
+  </header>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-label">PROJECT WORKSPACE</div>
+      <button class="nav-item active" data-page="dashboard">▦ <span>Dashboard</span></button>
+      <button class="nav-item" data-page="charter">▤ <span>Project charter</span></button>
+      <button class="nav-item" data-page="scope">☷ <span>Scope &amp; changes</span></button>
+      <button class="nav-item" data-page="schedule">▥ <span>Schedule &amp; team</span></button>
+      <button class="nav-item" data-page="cost">◉ <span>Costs &amp; EVM</span></button>
+      <button class="nav-item" data-page="quality">✓ <span>Quality &amp; defects</span></button>
+      <button class="nav-item" data-page="risks">⚑ <span>Risks &amp; responses</span></button>
+      <div class="sidebar-project"><span>ACTIVE PROJECT</span><strong>Smart Healthcare System</strong><small>5 hospitals · In progress</small></div>
+    </aside>
+    <main id="main-content"><div class="loading">Loading project data…</div></main>
+  </div>
+  <div id="toast" role="status"></div>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/charter.js"></script>
+  <script src="js/scope.js"></script>
+  <script src="js/schedule.js"></script>
+  <script src="js/cost.js"></script>
+  <script src="js/quality.js"></script>
+  <script src="js/risks.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+window.pages.quality = async () => {
+  const [defects, checklists] = await Promise.all([api.get("/defects"), api.get("/checklists")]);
+  return `${heading("Quality & defects", "Track defects, testing results and deliverable inspections", '<button class="btn" data-action="add-defect">+ Log defect</button>')}
+    <section class="card"><h2 class="card-title">Defect register</h2><p class="card-subtitle">Resolve the critical appointment and patient record issues before rollout</p>
+      <div id="defect-form" class="inline-form"><form id="defect-create" class="form-grid">
+        <div class="field full"><label>Defect</label><input name="title" required></div><div class="field"><label>Severity</label><select name="severity"><option>Critical</option><option>High</option><option>Medium</option><option>Low</option></select></div><div class="field"><label>Assigned to</label><input name="assignee" required></div>
+        <div class="field full"><label>Description</label><textarea name="description"></textarea></div><div class="form-actions field full"><button class="btn">Save defect</button><button type="button" class="btn secondary" data-action="cancel-form">Cancel</button></div>
+      </form></div>
+      <div class="table-wrap"><table><thead><tr><th>DEFECT</th><th>SEVERITY</th><th>ASSIGNEE</th><th>STATUS</th><th>ACTION</th></tr></thead><tbody>${defects.map((d) => `<tr><td><strong>${escapeHtml(d.title)}</strong><br><small>${escapeHtml(d.description)}</small></td><td>${badge(d.severity)}</td><td>${escapeHtml(d.assignee)}</td><td>${badge(d.status)}</td><td>${d.status !== "Resolved" ? `<button class="btn secondary" data-action="resolve-defect" data-id="${d._id}">Mark resolved</button>` : "—"}</td></tr>`).join("") || '<tr><td colspan="5" class="empty">No defects reported.</td></tr>'}</tbody></table></div>
+    </section>
+    <section class="card"><div class="section-header"><div><h2 class="card-title">Quality checklist</h2><p class="card-subtitle">Inspection and test results for project deliverables</p></div><button class="btn" data-action="add-check">+ Add check</button></div>
+      <div id="check-form" class="inline-form"><form id="check-create" class="form-grid"><div class="field"><label>Checklist item</label><input name="item" required></div><div class="field"><label>Result</label><select name="result"><option>Pending</option><option>Pass</option><option>Fail</option></select></div><div class="field full"><label>Notes</label><input name="notes"></div><div class="form-actions field full"><button class="btn">Save check</button><button type="button" class="btn secondary" data-action="cancel-form">Cancel</button></div></form></div>
+      <div class="table-wrap"><table><thead><tr><th>INSPECTION / TEST</th><th>RESULT</th><th>NOTES</th></tr></thead><tbody>${checklists.map((c) => `<tr><td>${escapeHtml(c.item)}</td><td>${badge(c.result)}</td><td>${escapeHtml(c.notes)}</td></tr>`).join("") || '<tr><td colspan="3" class="empty">No quality checks added.</td></tr>'}</tbody></table></div>
+    </section>`;
+};
